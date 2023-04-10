@@ -77,8 +77,7 @@ def fetch_config_from_yaml(cfg_path: Optional[Path] = None) -> YAML:
 
     if cfg_path:
         with open(cfg_path, "r") as conf_file:
-            parsed_config = load(conf_file.read())
-            return parsed_config
+            return load(conf_file.read())
     raise OSError(f"Did not find config file at path: {cfg_path}")
 
 
@@ -87,13 +86,10 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
     if parsed_config is None:
         parsed_config = fetch_config_from_yaml()
 
-    # specify the data attribute from the strictyaml YAML type.
-    _config = Config(
+    return Config(
         app_config=AppConfig(**parsed_config.data),
         model_config=ModelConfig(**parsed_config.data),
     )
-
-    return _config
 
 
 config = create_and_validate_config()

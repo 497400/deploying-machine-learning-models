@@ -58,15 +58,12 @@ def pre_pipeline_preparation(*, dataframe: pd.DataFrame) -> pd.DataFrame:
 
 
 def _load_raw_dataset(*, file_name: str) -> pd.DataFrame:
-    dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
-    return dataframe
+    return pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
 
 
 def load_dataset(*, file_name: str) -> pd.DataFrame:
     dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
-    transformed = pre_pipeline_preparation(dataframe=dataframe)
-
-    return transformed
+    return pre_pipeline_preparation(dataframe=dataframe)
 
 
 def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
