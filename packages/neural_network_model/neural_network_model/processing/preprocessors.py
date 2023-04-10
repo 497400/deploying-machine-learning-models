@@ -41,7 +41,7 @@ class CreateDataset(BaseEstimator, TransformerMixin):
                         self.image_size,
                         self.image_size, 3), dtype='float32')
 
-        for n in range(0, len(X)):
+        for n in range(len(X)):
             im = _im_resize(X, n, self.image_size)
             tmp[n] = im
 

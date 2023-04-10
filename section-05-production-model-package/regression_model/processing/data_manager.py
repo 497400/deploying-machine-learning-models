@@ -13,9 +13,7 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
     dataframe = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
     dataframe["MSSubClass"] = dataframe["MSSubClass"].astype("O")
 
-    # rename variables beginning with numbers to avoid syntax errors later
-    transformed = dataframe.rename(columns=config.model_config.variables_to_rename)
-    return transformed
+    return dataframe.rename(columns=config.model_config.variables_to_rename)
 
 
 def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
@@ -38,8 +36,7 @@ def load_pipeline(*, file_name: str) -> Pipeline:
     """Load a persisted pipeline."""
 
     file_path = TRAINED_MODEL_DIR / file_name
-    trained_model = joblib.load(filename=file_path)
-    return trained_model
+    return joblib.load(filename=file_path)
 
 
 def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
